@@ -20,6 +20,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "posts")
 public class Post extends BaseTimeEntity {
 
 	@Id
