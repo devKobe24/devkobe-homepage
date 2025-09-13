@@ -35,3 +35,7 @@ out/
 
 ### VS Code ###
 .vscode/
+
+# Application configuration
+# 운영 환경의 민감한 정보(DB 접속 정보 등)를 포함하므로 Git 추적에서 제외
+/src/main/resources/application-prod.yml
