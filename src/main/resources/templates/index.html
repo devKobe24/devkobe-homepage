@@ -1,18 +1,38 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>DevKobe Homepage</title>
-</head>
-<body>
-<h1>DevKobe 기술 블로그</h1>
-<a href="/posts/save">글쓰기</a>
-<hr/>
-<div th:each="post : ${posts}">
-    <h2><a th:href="@{/posts/{id}(id=${post.id})}" th:text="${post.title}"></a></h2>
-    <p th:text="${post.author}"></p>
-    <p th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></p>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default_layout}">
+
+<div layout:fragment="content">
+    <a href="/posts/save" class="btn btn-primary mb-3">글쓰기</a>
     <hr/>
+    <div th:each="post : ${posts.content}" class="post-item">
+        <h2><a th:href="@{/posts/{id}(id=${post.id})}" th:text="${post.title}"></a></h2>
+        <p class="post-meta">
+            <span>작성자: <span th:text="${post.author}"></span></span> |
+            <span>작성일: <span th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></span></span>
+        </p>
+        <hr/>
+    </div>
+
+    <nav aria-label="Page navigation">
+        <ul class="pagination" th:if="${posts.totalPages > 0}">
+            <li class="page-item" th:classappend="${posts.first} ? 'disabled'">
+                <a class="page-link" th:href="@{/(page=${posts.number-1}, size=${posts.size})}">
+                    <span>&laquo;</span>
+                </a>
+            </li>
+
+            <li class="page-item" th:each="pageNumber : ${#numbers.sequence(0, posts.totalPages-1)}" th:classappend="${pageNumber == posts.number} ? 'active'">
+                <a class="page-link" th:href="@{/(page=${pageNumber}, size=${posts.size})}" th:text="${pageNumber+1}"></a>
+            </li>
+
+            <li class="page-item" th:classappend="${posts.last} ? 'disabled'">
+                <a class="page-link" th:href="@{/(page=${posts.number+1}, size=${posts.size})}">
+                    <span>&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 </div>
-</body>
 </html>
