@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * packageName    : com.kobe.devkobehompage.repository
- * fileName       : CateoryRepository
+ * fileName       : CategoryRepository
  * author         : kobe
  * date           : 2025. 9. 14.
  * description    :
@@ -14,5 +14,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * -----------------------------------------------------------
  * 2025. 9. 14.        kobe       최초 생성
  */
-public interface CateoryRepository extends JpaRepository<Category, Long> {
+public interface CategoryRepository extends JpaRepository<Category, Long> {
 }
