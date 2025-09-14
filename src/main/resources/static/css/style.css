@@ -1,0 +1,54 @@
+/* src/main/resources/static/css/style.css */
+/* Basic Styles, Layout, Responsive Design ... */
+
+/* Code Block Highlighting */
+pre code.hljs {
+    display: block;
+    overflow-x: auto;
+    padding: 1em;
+    background: #282c34;
+    color: #abb2bf;
+}
+
+/* Pagination container */
+.pagination {
+    display: flex; /* Flexbox 레이아웃 적용 */
+    justify-content: center; /* 가운데 정렬 */
+    list-style: none; /* 기본 리스트 스타일 제거 */
+    padding: 0;
+    margin-top: 20px;
+}
+
+/* Pagination items */
+.pagination li {
+    margin: 0 5px; /* 항목 간 간격 */
+}
+
+/* Pagination links */
+.pagination a {
+    display: block;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #007bff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+/* Hover effect for links */
+.pagination a:hover {
+    background-color: #f2f2f2;
+}
+
+/* Active page style */
+.pagination .active a {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+/* Disabled page style */
+.pagination .disabled a {
+    color: #ccc;
+    pointer-events: none;
+}
