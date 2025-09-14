@@ -37,6 +37,12 @@ dependencies {
     // Markdown (기존 의존성 유지)
     implementation 'org.commonmark:commonmark:0.21.0'
 
+    // Thymeleaf Layout Dialect
+    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+
+    // HighlightJS
+    implementation 'org.webjars:highlightjs:11.11.1'
+
     // Test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
