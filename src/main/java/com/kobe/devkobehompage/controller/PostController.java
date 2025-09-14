@@ -1,13 +1,23 @@
 package com.kobe.devkobehompage.controller;
 
+import com.kobe.devkobehompage.dto.CategoryDto;
 import com.kobe.devkobehompage.dto.request.PostSaveRequestDto;
+import com.kobe.devkobehompage.dto.response.PostResponseDto;
+import com.kobe.devkobehompage.service.CategoryService;
 import com.kobe.devkobehompage.service.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 /**
  * packageName    : com.kobe.devkobehompage.controller
@@ -25,10 +35,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class PostController {
 
 	private final PostService postService;
+	private final CategoryService categoryService;
+
+	@ModelAttribute("categories")
+	public List<CategoryDto> categories() {
+		return categoryService.findAll();
+	}
+
+	@GetMapping("/category/{id}")
+	public String postsByCategory(@PathVariable Long id, Model model, @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+		Page<PostResponseDto> posts = postService.findAllByCategory(id, pageable);
+		model.addAttribute("posts", posts);
+		return "index";
+	}
 
 	@GetMapping("/")
-	public String index(Model model) {
-		model.addAttribute("posts", postService.findAllDesc());
+	public String index(Model model, @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+		Page<PostResponseDto> posts = postService.findAll(pageable);
+		model.addAttribute("posts", posts);
 		return "index";
 	}
 
