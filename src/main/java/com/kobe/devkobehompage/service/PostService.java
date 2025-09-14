@@ -1,17 +1,16 @@
 package com.kobe.devkobehompage.service;
 
 import com.kobe.devkobehompage.dto.request.PostSaveRequestDto;
-import com.kobe.devkobehompage.dto.resoponse.PostResponseDto;
+import com.kobe.devkobehompage.dto.response.PostResponseDto;
 import com.kobe.devkobehompage.entity.Post;
 import com.kobe.devkobehompage.entity.User;
 import com.kobe.devkobehompage.repository.PostRepository;
 import com.kobe.devkobehompage.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * packageName    : com.kobe.devkobehompage.service
@@ -46,10 +45,14 @@ public class PostService {
 		return new PostResponseDto(entity);
 	}
 
-	public List<PostResponseDto> findAllDesc() {
-		return postRepository.findAllDesc().stream()
-			.map(PostResponseDto::new)
-			.collect(Collectors.toList());
+	public Page<PostResponseDto> findAll(Pageable pageable) {
+		return postRepository.findAllDesc(pageable)
+			.map(PostResponseDto::new);
+	}
+
+	public Page<PostResponseDto> findAllByCategory(Long categoryId, Pageable pageable) {
+		return postRepository.findAllByCategory(categoryId, pageable)
+			.map(PostResponseDto::new);
 	}
 
 	@Transactional
