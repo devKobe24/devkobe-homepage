@@ -1,4 +1,4 @@
-package com.kobe.devkobehompage.dto.resoponse;
+package com.kobe.devkobehompage.dto.response;
 
 import com.kobe.devkobehompage.entity.Post;
 import lombok.Getter;
@@ -6,7 +6,7 @@ import lombok.Getter;
 import java.time.LocalDateTime;
 
 /**
- * packageName    : com.kobe.devkobehompage.dto.resoponse
+ * packageName    : com.kobe.devkobehompage.dto.response
  * fileName       : PostResponseDto
  * author         : kobe
  * date           : 2025. 9. 14.
