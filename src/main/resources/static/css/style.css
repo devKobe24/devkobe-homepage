@@ -52,3 +52,36 @@ pre code.hljs {
     color: #ccc;
     pointer-events: none;
 }
+
+/* Comments Section */
+.comments-section {
+    margin-top: 30px;
+}
+
+#comment-form textarea {
+    width: 100%;
+    min-height: 80px;
+    margin-bottom: 10px;
+}
+
+#comments-list {
+    list-style: none;
+    padding: 0;
+}
+
+#comments-list li {
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+}
+
+#comments-list small {
+    color: #666;
+}
+
+.delete-comment-btn {
+    float: right;
+    color: #dc3545;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
