@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default_layout}">
+
+<div layout:fragment="content">
+    <section class="about-me">
+        <div class="profile-header">
+            <img th:src="${user.profileImageUrl} ?: '/images/default-profile.png'" alt="Profile Image" class="profile-image">
+            <h1 th:text="${user.username}"></h1>
+            <p class="email" th:text="${user.email}"></p>
+        </div>
+
+        <div class="profile-bio">
+            <h2>About Me</h2>
+            <p th:text="${user.bio}"></p>
+        </div>
+
+        <div class="tech-stack">
+            <h2>Tech Stack</h2>
+            <ul>
+                <li>Java</li>
+                <li>Spring Boot</li>
+                <li>JPA</li>
+                <li>MySQL</li>
+            </ul>
+        </div>
+
+        <div class="contact-info">
+            <h2>Contact</h2>
+            <ul class="social-links">
+                <li th:if="${user.githubUrl}"><a th:href="${user.githubUrl}" target="_blank">GitHub</a></li>
+                <li th:if="${user.linkedInUrl}"><a th:href="${user.linkedInUrl}" target="_blank">LinkedIn</a></li>
+                <li th:if="${user.instagramUrl}"><a th:href="${user.instagramUrl}" target="_blank">Instagram</a></li>
+            </ul>
+        </div>
+    </section>
+</div>
+</html>
