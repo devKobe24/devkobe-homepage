@@ -2,8 +2,10 @@ package com.kobe.devkobehompage.service;
 
 import com.kobe.devkobehompage.dto.request.PostSaveRequestDto;
 import com.kobe.devkobehompage.dto.response.PostResponseDto;
+import com.kobe.devkobehompage.entity.Category;
 import com.kobe.devkobehompage.entity.Post;
 import com.kobe.devkobehompage.entity.User;
+import com.kobe.devkobehompage.repository.CategoryRepository;
 import com.kobe.devkobehompage.repository.PostRepository;
 import com.kobe.devkobehompage.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,13 +32,21 @@ public class PostService {
 
 	private final PostRepository postRepository;
 	private final UserRepository userRepository;
+	private final CategoryRepository categoryRepository;
 
 	@Transactional
 	public Long save(PostSaveRequestDto requestDto) {
-		// 임시로 첫 번째 사용자를 작성자로 설정 (향후 인증 기능 추가 시 변경)
+		// TODO: 로그인 기능 구현 후 실제 사용자로 변경해야 함
 		User user = userRepository.findById(1L)
 			.orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다. ID = " + 1L));
-		return postRepository.save(requestDto.toEntity(user)).getId();
+
+		// 2. categoryId로 Category 엔티티를 조회함.
+		Category category = categoryRepository.findById(requestDto.getCategoryId())
+			.orElseThrow(() -> new IllegalArgumentException("Invalid category ID"));
+
+		Post post = requestDto.toEntity(user, category);
+
+		return postRepository.save(post).getId();
 	}
 
 	public PostResponseDto findById(Long id) {
