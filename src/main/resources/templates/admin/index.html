@@ -80,6 +80,19 @@
                 </tbody>
             </table>
         </section>
+
+        <section class="admin-section">
+            <h3>Profile Management</h3>
+            <form th:action="@{/admin/profile/update}" method="post" th:object="${userProfile}">
+                <textarea name="bio" placeholder="Bio" th:field="*{bio}"></textarea>
+                <input type="text" name="profileImageUrl" placeholder="Profile Image URL" th:field="*{profileImageUrl}">
+                <input type="text" name="githubUrl" placeholder="GitHub URL" th:field="*{githubUrl}">
+                <input type="text" name="linkedinUrl" placeholder="LinkedIn URL" th:field="*{linkedInUrl}">
+                <input type="text" name="instagramUrl" placeholder="Instagram URL" th:field="*{instagramUrl}">
+                <button type="submit">Update Profile</button>
+            </form>
+        </section>
+
     </div>
 </main>
 </html>
