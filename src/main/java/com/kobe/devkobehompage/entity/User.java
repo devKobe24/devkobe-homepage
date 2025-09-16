@@ -40,11 +40,40 @@ public class User extends BaseTimeEntity {
 	@Column(nullable = false)
 	private UserRole role;
 
+	@Lob
+	private String bio;
+	private String profileImageUrl;
+	private String githubUrl;
+	private String linkedInUrl;
+	private String instagramUrl;
+
 	@Builder
-	public User(String username, String email, String passwordHash, UserRole role) {
+	public User(String username,
+	            String email,
+	            String passwordHash,
+	            UserRole role,
+	            String bio,
+	            String profileImageUrl,
+	            String githubUrl,
+	            String linkedInUrl,
+	            String instagramUrl
+	) {
 		this.username = username;
 		this.email = email;
 		this.passwordHash = passwordHash;
 		this.role = role;
+		this.bio = bio;
+		this.profileImageUrl = profileImageUrl;
+		this.githubUrl = githubUrl;
+		this.linkedInUrl = linkedInUrl;
+		this.instagramUrl = instagramUrl;
+	}
+
+	public void updateProfile(String bio, String profileImageUrl, String githubUrl, String linkedInUrl, String instagramUrl) {
+		this.bio = bio;
+		this.profileImageUrl = profileImageUrl;
+		this.githubUrl = githubUrl;
+		this.linkedInUrl = linkedInUrl;
+		this.instagramUrl = instagramUrl;
 	}
 }
