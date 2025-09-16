@@ -1,5 +1,6 @@
 package com.kobe.devkobehompage.dto.request;
 
+import com.kobe.devkobehompage.entity.Category;
 import com.kobe.devkobehompage.entity.Post;
 import com.kobe.devkobehompage.entity.PostStatus;
 import com.kobe.devkobehompage.entity.User;
@@ -24,12 +25,14 @@ import lombok.Setter;
 public class PostSaveRequestDto {
 	private String title;
 	private String content;
+	private Long categoryId;
 	private PostStatus status;
 
-	public Post toEntity(User user) {
+	public Post toEntity(User user, Category category) {
 		return Post.builder()
 			.title(title)
 			.content(content)
+			.category(category)
 			.status(status)
 			.user(user)
 			.build();
