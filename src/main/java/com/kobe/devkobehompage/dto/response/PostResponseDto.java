@@ -1,6 +1,7 @@
 package com.kobe.devkobehompage.dto.response;
 
 import com.kobe.devkobehompage.entity.Post;
+import com.kobe.devkobehompage.entity.PostStatus;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -26,7 +27,7 @@ public class PostResponseDto {
 	private String author;
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
-
+	private final PostStatus status;
 	private final List<CommentResponseDto> comments;
 
 	public PostResponseDto(Post entity) {
@@ -36,6 +37,7 @@ public class PostResponseDto {
 		this.author = entity.getUser().getUsername();
 		this.createdAt = entity.getCreatedAt();
 		this.updatedAt = entity.getUpdatedAt();
+		this.status = entity.getStatus();
 		this.comments = entity.getComments().stream()
 			.map(CommentResponseDto::new)
 			.collect(Collectors.toList());
