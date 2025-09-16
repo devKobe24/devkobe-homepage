@@ -1,7 +1,10 @@
 package com.kobe.devkobehompage.dto;
 
 import com.kobe.devkobehompage.entity.Category;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * packageName    : com.kobe.devkobehompage.dto
@@ -15,12 +18,32 @@ import lombok.Getter;
  * 2025. 9. 14.        kobe       최초 생성
  */
 @Getter
+@Setter
+@NoArgsConstructor
 public class CategoryDto {
-	private final Long id;
-	private final String name;
+	private Long id;
+	private String name;
+	private String description;
+	private String color;
+	private int displayOrder;
 
-	public CategoryDto(Category entity) {
-		this.id = entity.getId();
-		this.name = entity.getName();
+	@Builder
+	public CategoryDto(Long id, String name, String description, String color, int displayOrder) {
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.color = color;
+		this.displayOrder = displayOrder;
+	}
+
+	public static CategoryDto from(Category category) {
+		return CategoryDto.builder()
+			.id(category.getId())
+			.name(category.getName())
+			.description(category.getDescription())
+			.color(category.getColor())
+			.displayOrder(category.getDisplayOrder())
+			.build();
+
 	}
 }
