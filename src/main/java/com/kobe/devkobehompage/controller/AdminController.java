@@ -1,6 +1,7 @@
 package com.kobe.devkobehompage.controller;
 
 import com.kobe.devkobehompage.dto.CategoryDto;
+import com.kobe.devkobehompage.dto.UserDto;
 import com.kobe.devkobehompage.service.AdminService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,7 @@ public class AdminController {
 		model.addAttribute("posts", adminService.findAllPosts());
 		model.addAttribute("categories", adminService.findAllCategories());
 		model.addAttribute("comments", adminService.findAllComments());
+		model.addAttribute("userProfile", adminService.findUserById(1L));
 		return "admin/index";
 	}
 
@@ -42,6 +44,13 @@ public class AdminController {
 	@PostMapping("/categories/delete/{id}")
 	public String deleteCategory(@PathVariable Long id) {
 		adminService.deleteCategory(id);
+		return "redirect:/admin";
+	}
+
+	@PostMapping("/profile/update")
+	public String updateProfile(@ModelAttribute UserDto userDto) {
+		// TODO: 현재는 기본 사용자 ID(1)를 사용하고 있으나, 추후 인증된 사용자 정보로 대체해야 합니다.
+		adminService.updateUserProfile(1L, userDto);
 		return "redirect:/admin";
 	}
 }
