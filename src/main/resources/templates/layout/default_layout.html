@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
 <head>
     <meta charset="UTF-8">
     <title>DevKobe's Blog</title>
@@ -7,31 +8,36 @@
 
     <link rel="stylesheet" href="/webjars/highlightjs/11.9.0/styles/default.min.css">
 </head>
-<body>
-<div class="container">
-    <header>
-        <h1><a href="/">DevKobe's Blog</a></h1>
-        <a href="/admin">관리자</a>
-    </header>
-    <div class="main-content">
-        <aside class="sidebar">
-            <h3>Categories</h3>
-            <ul>
-                <li th:each="category : ${categories}">
-                    <a th:href="@{/category/{id}(id=${category.id})}" th:text="${category.name}"></a>
-                </li>
-            </ul>
-        </aside>
-        <main layout:fragment="content"></main>
-    </div>
-    <footer>
-        <p>&copy; 2025 DevKobe. All rights reserved.</p>
-    </footer>
-</div>
 
-<script src="/webjars/highlightjs/11.9.0/highlight.min.js"></script>
-<script>
-    hljs.highlightAll();
-</script>
+<body>
+    <div class="container">
+        <header>
+            <h1><a href="/">DevKobe's Blog</a></h1>
+            <nav>
+                <a href="/about">About</a>
+                <a href="/admin">관리자</a>
+            </nav>
+        </header>
+        <div class="main-content">
+            <aside class="sidebar">
+                <h3>Categories</h3>
+                <ul>
+                    <li th:each="category : ${categories}">
+                        <a th:href="@{/category/{id}(id=${category.id})}" th:text="${category.name}"></a>
+                    </li>
+                </ul>
+            </aside>
+            <main layout:fragment="content"></main>
+        </div>
+        <footer>
+            <p>&copy; 2025 DevKobe. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="/webjars/highlightjs/11.9.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
 </body>
+
 </html>
