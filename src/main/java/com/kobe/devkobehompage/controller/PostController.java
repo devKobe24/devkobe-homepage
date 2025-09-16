@@ -63,7 +63,11 @@ public class PostController {
 	}
 
 	@GetMapping("/posts/save")
-	public String postSaveForm() {
+	public String postSaveForm(Model model) {
+		// 모든 카테고리를 조회하여 모델에 추가
+		List<CategoryDto> categories = categoryService.findAll();
+		model.addAttribute("categories", categories);
+		model.addAttribute("post", new PostSaveRequestDto());
 		return "post-save";
 	}
 
