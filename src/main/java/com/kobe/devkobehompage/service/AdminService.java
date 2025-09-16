@@ -1,12 +1,15 @@
 package com.kobe.devkobehompage.service;
 
 import com.kobe.devkobehompage.dto.CategoryDto;
+import com.kobe.devkobehompage.dto.UserDto;
 import com.kobe.devkobehompage.dto.response.CommentResponseDto;
 import com.kobe.devkobehompage.dto.response.PostResponseDto;
 import com.kobe.devkobehompage.entity.Category;
+import com.kobe.devkobehompage.entity.User;
 import com.kobe.devkobehompage.repository.CategoryRepository;
 import com.kobe.devkobehompage.repository.CommentRepository;
 import com.kobe.devkobehompage.repository.PostRepository;
+import com.kobe.devkobehompage.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,6 +35,7 @@ public class AdminService {
 	private final PostRepository postRepository;
 	private final CategoryRepository categoryRepository;
 	private final CommentRepository commentRepository;
+	private final UserRepository userRepository;
 
 	@Transactional(readOnly = true)
 	public List<PostResponseDto> findAllPosts() {
@@ -68,5 +72,17 @@ public class AdminService {
 	@Transactional
 	public void deleteCategory(Long id) {
 		categoryRepository.deleteById(id);
+	}
+
+	@Transactional(readOnly = true)
+	public UserDto findUserById(Long id) {
+		User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
+		return UserDto.from(user);
+	}
+
+	@Transactional
+	public void updateUserProfile(Long id, UserDto userDto) {
+		User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
+		user.updateProfile(userDto.getBio(), userDto.getProfileImageUrl(), userDto.getGithubUrl(), userDto.getLinkedInUrl(), userDto.getInstagramUrl());
 	}
 }
